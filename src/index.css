@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+/* 1. Google Fonts Hierarchy */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap');
+
+@custom-variant hover (&:hover);
+
+@theme {
+  /* Global Luxury Color Palette */
+  --color-luxury-white: #FFFFFF;
+  --color-luxury-platinum: #D9D9D9;
+  --color-luxury-charcoal: #1A1A1A;
+  
+  --color-brand-dark: #2B1B12;
+  --color-brand-cream: #E8DCCF;
+  --color-brand-gold: #C89B6D;
+
+  /* Cinema Fonts */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-display: 'Cormorant Garamond', serif;
+
+  /* Premium Animations */
+  --animate-reveal: reveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  --animate-slide-up: slideUp 0.8s ease-out forwards;
+  --animate-slide-down: slideDown 0.5s ease-out forwards;
+  --animate-marquee: marquee 30s linear infinite;
+
+  @keyframes reveal {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(0); }
+  }
+  @keyframes slideUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideDown {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+}
+
+/* 2. THEME DEFINITIONS (Light & Dark) */
+:root {
+  /* Light Mode Variables */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F9F9F9;
+  --text-main: #1A1A1A;
+  --text-muted: rgba(26, 26, 26, 0.6);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.8);
+}
+
+.dark {
+  /* Dark Mode Variables - Royal Deep Chocolate/Espresso */
+  --bg-primary: #120B08; /* Ultra Dark Brown */
+  --bg-secondary: #1A120E;
+  --text-main: #E8DCCF; /* Creamy White */
+  --text-muted: rgba(232, 220, 207, 0.6);
+  --border-color: rgba(200, 155, 109, 0.2); /* Gold Muted Border */
+  --glass-bg: rgba(18, 11, 8, 0.85);
+}
+
+/* 3. Global Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    transition: background-color 0.5s ease, color 0.5s ease;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+/* 4. Luxury UI Components */
+@layer components {
+  .luxury-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Dynamic Glass Header */
+  .glass-header {
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  /* Premium Buttons */
+  .btn-premium {
+    @apply relative overflow-hidden px-10 py-4 bg-brand-dark text-brand-cream 
+           transition-all duration-500 hover:bg-black active:scale-95
+           font-medium tracking-[0.3em] uppercase text-[10px] shadow-2xl;
+  }
+
+  .dark .btn-premium {
+    @apply bg-brand-gold text-brand-dark hover:bg-white;
+  }
+
+  /* Balanced Inputs */
+  .luxury-input {
+    @apply w-full bg-transparent border-b py-3 px-1 outline-none transition-all duration-300;
+    border-color: var(--border-color);
+    color: var(--text-main);
+  }
+
+  .luxury-input:focus {
+    border-color: var(--color-brand-gold);
+  }
+}
+
+/* 5. Custom Elements */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-gold);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Animation for Auto-Marquee */
+.animate-marquee {
+  display: flex;
+  width: 200%;
+  animation: marquee 30s linear infinite;
+}
